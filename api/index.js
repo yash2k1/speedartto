@@ -59,19 +59,24 @@ app.post('/Login', async (req,res)=>{
   });
 
   app.get('/Profile',(req,res)=>{
-    const{token}=req.cookies;
-    if(token){
-      jwt.verify(token,jwtSecret,{},async(err,userData)=>{
-      if(err) throw err;
-     const {name,email,_id}= await User.findById(userData.id);
-      res.json({name,email,_id});
-      });
+    // const{token}=req.cookies;
+    // if(token){
+    //   jwt.verify(token,jwtSecret,{},async(err,userData)=>{
+    //   if(err) throw err;
+    //  const {name,email,_id}= await User.findById(userData.id);
+    //   res.json({name,email,_id});
+    //   });
       
-    }else{
-      res.json({token});
-    }
-    
-  })
+    // }else{
+    //   res.json({token});
+    // }
+    res.json('user info');
+  });
+// taking logout request and resond on it
+app.post('logout',(req,res)=>{
+  res.cookie('token','').json(true);
+})
+
 
 app.listen(4000);
 
